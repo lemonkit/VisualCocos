@@ -1,0 +1,37 @@
+return {
+    {
+        __type__ = "lime.SceneAsset";
+        -- property start without _ is contructor parameter
+        scene = {
+            __id__ = 2;
+        };
+    };
+
+    {
+        __type__    = "lime.Scene";
+        name        = "main";
+        _children   = {
+            {
+                __id__ = 3;
+            }
+        };
+    };
+
+    {
+        __type__        = "lime.Node";
+        _name           = "FootBar";
+        _components     = {
+            {
+                __id__  = 4;
+            }
+        };
+    };
+
+    {
+        __type__        = "lime.Sprite";
+        _texture        = "Texture/dibu.png";
+        node            = {
+            __id__      = 3;
+        }
+    };
+}
