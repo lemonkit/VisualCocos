@@ -339,6 +339,8 @@ int SimulatorWin::run()
     initGLContextAttrs();
     auto glview = GLViewImpl::createWithRect(title.str(), frameRect, frameScale);
     _hwnd = glview->getWin32Window();
+	SetWindowLong(_hwnd, GWL_STYLE, GetWindowLong(_hwnd,GWL_STYLE) |WS_MAXIMIZEBOX | WS_THICKFRAME);
+
     player::PlayerWin::createWithHwnd(_hwnd);
     DragAcceptFiles(_hwnd, TRUE);
     //SendMessage(_hwnd, WM_SETICON, ICON_BIG, (LPARAM)icon);
@@ -361,7 +363,10 @@ int SimulatorWin::run()
         RECT rect;
         GetWindowRect(_hwnd, &rect);
         MoveWindow(_hwnd, pos.x, pos.y, rect.right - rect.left, rect.bottom - rect.top, FALSE);
+		
     }
+
+	ShowWindow(_hwnd, SW_SHOWMAXIMIZED);
 
     // path for looking Lang file, Studio Default images
     FileUtils::getInstance()->addSearchPath(getApplicationPath().c_str());
