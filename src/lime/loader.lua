@@ -23,6 +23,15 @@ function module:ctor()
     self.objects = {}
 end
 
+
+function module:get()
+    if #self.objects  == 0 then
+        return false
+    end
+
+    return true, self.objects[1]
+end
+
 function module:loadobject(idx,config)
 
     if type(config) ~= "table" then
@@ -118,6 +127,8 @@ function module:load()
     if root then
         root:load()
     end
+
+    return self:get()
 end
 
 def("lime.loader",module)

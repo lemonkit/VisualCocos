@@ -350,7 +350,7 @@ int SimulatorWin::run()
     auto director = Director::getInstance();
     director->setOpenGLView(glview);
 
-    director->setAnimationInterval(1.0 / 60.0);
+    director->setAnimationInterval(1.0f / 24.0f);
 
     // set window position
     if (_project.getProjectDir().length())

@@ -40,7 +40,6 @@ function module:load()
     end
 
     for _,com in ipairs(self.components or {}) do
-        print("===========")
         com:onload()
     end
 end

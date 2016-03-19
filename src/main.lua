@@ -12,7 +12,6 @@ local function main()
     cc.exports.app = lime.app:create({
         name = CC_APP_NAME
     })
-    
     app:run("asdb://prefab/test.fire")
 end
 

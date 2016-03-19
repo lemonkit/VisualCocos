@@ -10,6 +10,9 @@ function module:ctor()
     self.components = {}
     self.asdb = lime.asdb:create()
     self.odb = lime.odb:create({ name = self.name })
+    if CC_SHOW_FPS then
+        cc.Director:getInstance():setDisplayStats(true)
+    end
 end
 
 function module:run(name)
@@ -22,11 +25,21 @@ function module:run(name)
 
     local loader = lime.loader:create({ path = datafile })
     -- load scene from data file
-    loader:load()
+    local ok,obj = loader:load()
 
-    local assert = loader.objects[1]
+    assert(ok and obj.__cname == "lime.SceneAsset","load prefab must be a scene")
 
-    display.runScene(assert.scene.ccnode)
+    local table = self.odb:createtable("lime")
+
+    table:insert(obj.scene)
+
+    display.runScene(obj.scene.ccnode)
+
+    local scheduler = cc.Director:getInstance():getScheduler()
+
+    scheduler:scheduleScriptFunc(function(delta)
+        table:update(delta)
+    end,0,false)
 end
 
 def("lime.app",module)

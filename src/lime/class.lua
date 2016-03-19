@@ -107,6 +107,18 @@ function module.def(name,metaclass)
             })
         end
 
+        printInfo("%s valid properties:",name)
+        for k,v in pairs(creator.__properties) do
+            printInfo("property %s :%s",k,v)
+            if type(v) == "table" then
+                if not v.__cname then
+                    obj[k] = v
+                end
+            else
+                obj[k] = v
+            end
+        end
+
         for name,val in pairs(properties or {}) do
             local target = creator.__properties[name]
 

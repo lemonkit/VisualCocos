@@ -27,7 +27,8 @@ function module:onload()
     self.target.ccnode:addChild(self.ccnode)
 end
 
-function module:update()
+function module:update(delta)
+    print(delta)
 end
 
 function module:onclosed()
